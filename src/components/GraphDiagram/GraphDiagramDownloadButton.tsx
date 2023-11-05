@@ -1,5 +1,4 @@
 import React from 'react';
-import { report } from '../../bugsnag.js';
 import $ from '../../dom.js';
 import { DownloadIcon } from '../Icons.js';
 import { getDiagramElement } from './GraphDiagram.js';
@@ -41,7 +40,7 @@ function downloadPng() {
   const vb = svg.getAttribute('viewBox')?.split(' ');
 
   if (!vb) {
-    report.error(Error('No viewBox'));
+    console.error(Error('No viewBox'));
     return;
   }
 

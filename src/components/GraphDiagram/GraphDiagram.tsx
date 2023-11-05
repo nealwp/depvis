@@ -1,8 +1,7 @@
 import { Graphviz } from '@hpcc-js/wasm/graphviz';
 import { select } from 'd3-selection';
 import React, { useEffect, useState } from 'react';
-import { QueryType, queryModuleCache } from '../../ModuleCache.js';
-import { report } from '../../bugsnag.js';
+import { queryModules } from '../../ModuleCache.js';
 import { getModule } from '../../ModuleCache.js';
 import {
   PARAM_COLORIZE,
@@ -31,7 +30,6 @@ import {
   gatherSelectionInfo,
   getGraphForQuery,
 } from './graph_util.js';
-import Module from '../../Module.js';
 
 export type ZoomOption =
   | typeof ZOOM_NONE
@@ -68,10 +66,8 @@ export default function GraphDiagram() {
   const [graphviz, graphvizLoading] = useGraphviz();
 
   // Dependencies to include for top-level modules
-  const dependencyTypes = new Set<DependencyKey>([
-    'dependencies',
-    'peerDependencies',
-  ]);
+  const dependencyTypes = new Set<DependencyKey>(['dependencies']);
+
   (depTypes ?? '')
     .split(/\s*,\s*/)
     .sort()
@@ -182,7 +178,7 @@ export default function GraphDiagram() {
         const dotDoc = composeDOT(graph.modules);
         try {
           svgMarkup = graph?.modules.size
-            ? await graphviz.dot(dotDoc, 'svg')
+            ? graphviz.dot(dotDoc, 'svg')
             : '<svg />';
         } catch (err) {
           console.error(err);
@@ -192,8 +188,7 @@ export default function GraphDiagram() {
       if (signal.aborted) return; // Check after all async stuff
 
       // Parse markup
-      const svgDom = new DOMParser().parseFromString(svgMarkup, 'image/svg+xml')
-        .children[0] as SVGSVGElement;
+      const svgDom = new DOMParser().parseFromString(svgMarkup, 'image/svg+xml').children[0] as SVGSVGElement;
       svgDom.remove();
 
       // Remove background element so page background shows thru
@@ -230,7 +225,7 @@ export default function GraphDiagram() {
         if (m.name) {
           el.dataset.module = m.name;
         } else {
-          report.warn(Error(`Bad replace: ${key}`));
+          console.warn(Error(`Bad replace: ${key}`));
         }
 
         if (!moduleFilter(m)) {
@@ -251,7 +246,7 @@ export default function GraphDiagram() {
 
   // Effect: render graph selection
   useEffect(
-    () => updateSelection(graph, queryType, queryValue),
+    () => updateSelection(graph, queryValue),
     [queryType, queryValue, domSignal],
   );
 
@@ -288,12 +283,11 @@ export default function GraphDiagram() {
 
 export function updateSelection(
   graph: GraphState | null,
-  queryType: QueryType,
   queryValue: string,
 ) {
   if (!graph) return;
 
-  const modules = queryModuleCache(queryType, queryValue);
+  const modules = queryModules(queryValue);
 
   // Get selection info
   const si = gatherSelectionInfo(graph, modules.values());

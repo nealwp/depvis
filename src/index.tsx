@@ -1,5 +1,3 @@
-import './bugsnag.js'; // Initialize ASAP!
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './components/App/App.js';

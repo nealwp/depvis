@@ -1,5 +1,3 @@
-import { getModuleKey } from './module_util.js';
-
 export default class Module {
   name: string;
   label: string;
@@ -15,7 +13,7 @@ export default class Module {
   }
 
   get key() {
-    return getModuleKey(this.name);
+    return this.name;
   }
 
   toString() {

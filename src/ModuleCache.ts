@@ -2,21 +2,25 @@ import Module from './Module.js';
 
 export const REGISTRY_BASE_URL = 'https://registry.npmjs.org';
 
-export type QueryType = 'exact' | 'name' | 'license' | 'maintainer';
+export type QueryType = 'exact' 
 
 const exampleData = [
-    { name: "service-a", label: "Service A", dependencies: ["service-b", "service-c", "service-d"] },
-    { name: "service-b", label: "Service B", dependencies: ["service-c", "service-d", "service-e"] },
-    { name: "service-c", label: "Service C", dependencies: ["service-d", "service-e", "service-f"] },
-    { name: "service-d", label: "Service D", dependencies: ["service-e", "service-f", "service-g"] },
-    { name: "service-e", label: "Service E", dependencies: ["service-f", "service-g", "service-h"] },
-    { name: "service-f", label: "Service F", dependencies: ["service-g", "service-h", "service-i"] },
-    { name: "service-g", label: "Service G", dependencies: ["service-h", "service-i", "service-j"] },
-    { name: "service-h", label: "Service H", dependencies: ["service-i", "service-j", "service-k"] },
-    { name: "service-i", label: "Service I", dependencies: ["service-j", "service-k", "database"] },
-    { name: "service-j", label: "Service J", dependencies: ["service-k", "database"] },
-    { name: "service-k", label: "Service K", dependencies: ["database"] },
-    { name: "database", label: "Database", dependencies: [] },
+    { name: "service-a", label: "Service A", dependencies: ["service-b", "service-c", "service-d", "service-e", "service-f", "service-h"] },
+    { name: "service-b", label: "Service B", dependencies: ["database-1"] },
+    { name: "service-c", label: "Service C", dependencies: ["database-1", "library-1", "library-2"] },
+    { name: "service-d", label: "Service D", dependencies: ["database-1"] },
+    { name: "library-1", label: "Library 1", dependencies: [] },
+    { name: "library-2", label: "Library 2", dependencies: [] },
+    { name: "library-3", label: "Library 3", dependencies: [] },
+    { name: "service-e", label: "Service E", dependencies: ["service-f", "database-1"] },
+    { name: "service-f", label: "Service F", dependencies: ["library-3", "message-broker"] },
+    { name: "service-g", label: "Service G", dependencies: ["message-broker", "database-1"] },
+    { name: "service-h", label: "Service H", dependencies: ["service-g", "service-j", "service-k", "database-1"] },
+    { name: "service-i", label: "Service I", dependencies: ["service-j", "service-k", "database-1"] },
+    { name: "service-j", label: "Service J", dependencies: ["service-k", "database-1"] },
+    { name: "service-k", label: "Service K", dependencies: ["database-1"] },
+    { name: "message-broker", label: "Message Broker", dependencies: [] },
+    { name: "database-1", label: "Database 1", dependencies: [] },
 ]
 
 export function getModule(moduleKey: string): Module {
@@ -26,23 +30,16 @@ export function getModule(moduleKey: string): Module {
     return new Module(name, label, dependencies)
 }
 
-export function queryModuleCache(queryType: QueryType, queryValue: string) {
+export function queryModules(queryValue: string) {
   const results = new Map<string, Module>();
 
-  if (!queryType || !queryValue) return results;
+  if (!queryValue) return results;
 
   for (const module of exampleData.values()) {
     if (!module) continue;
 
     const m = new Module(module.name, module.label, module.dependencies)
-    switch (queryType) {
-      case 'exact':
-        if (module.name === queryValue) results.set(module.name, m);
-        break;
-      case 'name':
-        if (module.name === queryValue) results.set(module.name, m);
-        break;
-    }
+    if (module.name === queryValue) results.set(module.name, m);
   }
 
   return results;
