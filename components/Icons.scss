@@ -1,0 +1,27 @@
+.icon {
+  display: inline-block;
+}
+.icon-path-stroke {
+  stroke: currentColor;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.icon-path-fill {
+  stroke: none;
+  fill: currentColor;
+}
+
+.icon-sponsor {
+  stroke: var(--bg-violet);
+}
+
+a .icon {
+  vertical-align: middle;
+}
+
+button .icon {
+  vertical-align: baseline;
+}

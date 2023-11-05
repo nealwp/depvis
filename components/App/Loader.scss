@@ -1,0 +1,43 @@
+.loader {
+  position: absolute;
+  right: 0;
+  z-index: 99;
+  box-sizing: border-box;
+  background: var(--tabs-bg) var(--bg-gradient);
+  padding-left: 0.5em;
+  width: var(--inspector-size);
+  overflow: hidden;
+  color: var(--tabs-text);
+  font-weight: 600;
+  line-height: var(--tabs-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @keyframes MOVE-BG {
+    from {
+      transform: translateX(-56.57px);
+    } // sqrt(2) * gradient_width
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .bg {
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    animation-duration: 1.6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: MOVE-BG;
+    background: repeating-linear-gradient(
+      -45deg,
+      white 0,
+      white 20px,
+      var(--highlight) 20px,
+      var(--highlight) 40px
+    );
+    width: calc(100% + 57px);
+    height: 2pt;
+  }
+}

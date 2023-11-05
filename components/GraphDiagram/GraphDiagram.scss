@@ -1,0 +1,175 @@
+#graph {
+  position: relative;
+
+  flex-grow: 1;
+  height: 100vh;
+  overflow: auto;
+  user-select: none;
+  -webkit-user-select: none;
+
+  --warning0: #f6f6e0;
+  --warning1: #d9d9d9;
+  --stub: #f00;
+  &.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.graphviz-loading,
+  &.graphviz-failed {
+    margin-top: 20vh;
+    text-align: center;
+  }
+  &.graphviz-failed {
+    color: var(--stroke-red);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #graph {
+    --warning0: #101010;
+    --warning1: #660;
+  }
+}
+
+#graph-controls {
+  display: flex;
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  cursor: default;
+
+  button {
+    display: inline-block;
+    margin: 0;
+    outline: 0;
+    border: solid 1px var(--bg1);
+    border-radius: var(--rad_sm);
+    background: var(--bg0);
+    color: var(--text);
+    font-size: 1.8em;
+    line-height: 1em;
+
+    &.selected {
+      background-color: var(--highlight);
+    }
+  }
+}
+
+svg#graph-diagram {
+  fill: var(--text);
+}
+
+pattern#warning {
+  .line0 {
+    stroke: var(--warning0);
+  }
+  .line1 {
+    stroke: var(--warning1);
+  }
+}
+
+g .stub {
+  opacity: 0.6;
+
+  > path {
+    stroke-dasharray: 4, 4;
+    stroke: var(--stub);
+  }
+}
+
+g.node {
+  text {
+    fill: var(--text);
+  }
+
+  path {
+    stroke: var(--text);
+    fill: var(--bg0);
+  }
+
+  &.collapsed,
+  &.peer {
+    opacity: 0.5;
+  }
+
+  &.selected {
+    & > path {
+      stroke-width: 3;
+      stroke: var(--highlight);
+    }
+  }
+
+  &.upstream {
+    & > path {
+      stroke: var(--stroke-blue);
+    }
+  }
+
+  &.downstream {
+    & > path {
+      stroke: var(--stroke-orange);
+    }
+  }
+
+  &.unselected {
+    opacity: 0.35;
+  }
+
+  &.warning > path {
+    fill: url(#warning);
+  }
+
+  * {
+    cursor: pointer;
+  }
+}
+
+g.edge {
+  --selected-edge-width: 2;
+
+  > path {
+    // stylelint-disable-line no-descending-specificity
+    stroke: var(--text);
+  }
+
+  > polygon {
+    stroke: var(--text);
+    fill: var(--text);
+  }
+
+  &.upstream {
+    & > path {
+      stroke: var(--stroke-blue);
+      stroke-width: var(--selected-edge-width);
+    }
+
+    & > polygon {
+      stroke: var(--stroke-blue);
+      fill: var(--stroke-blue);
+    }
+  }
+
+  &.downstream {
+    & > path {
+      stroke: var(--stroke-orange);
+      stroke-width: var(--selected-edge-width);
+    }
+
+    & > polygon {
+      stroke: var(--stroke-orange);
+      fill: var(--stroke-orange);
+    }
+  }
+
+  &.unselected {
+    opacity: 0.35;
+  }
+}
+
+@media print {
+  #graph-controls {
+    display: none;
+  }
+}

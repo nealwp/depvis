@@ -1,0 +1,115 @@
+#inspector {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  transition: flex-basis 0.5s;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--text);
+
+  &.open {
+    flex: 0 0 var(--inspector-size);
+  }
+
+  .description {
+    font-weight: 600;
+  }
+
+  .module {
+    white-space: nowrap;
+  }
+
+  .tag {
+    cursor: pointer;
+    border-radius: var(--rad_lg);
+    background-color: var(--bg1);
+    padding: 2px 8px;
+    overflow: hidden;
+    color: var(--text);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &.maintainer {
+      padding: 0;
+      height: 32px;
+
+      img {
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  footer {
+    box-sizing: border-box;
+    padding: 0.5em;
+    width: 32em;
+    color: var(--text-dim);
+    text-align: center;
+
+    #github {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+label {
+  display: block;
+  margin: 0.3em 0;
+}
+
+summary {
+  position: -webkit-sticky;
+  cursor: pointer;
+  margin: 0.7em 0 0.5em;
+  outline: none;
+  border-top: solid 1px var(--bg1);
+  padding: 0.2em;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+#tabs {
+  display: flex;
+  flex-shrink: 0;
+  flex-basis: auto;
+  background: var(--tabs-bg) var(--bg-gradient);
+  color: var(--tabs-text);
+  user-select: none;
+
+  > * {
+    line-height: var(--tabs-height);
+  }
+
+  .tab {
+    cursor: pointer;
+    border-left: solid 1px #888;
+    background: var(--tabs-bg) var(--bg-gradient);
+    padding: 0 10px;
+    font-weight: 600;
+    font-size: 12pt;
+
+    &.active {
+      border-color: transparent;
+      background: var(--highlight);
+    }
+  }
+}
+
+.pane {
+  flex-grow: 1;
+  box-sizing: border-box;
+  box-shadow: inset 1px -1px 6px var(--inset-shadow-color, #d6d6d677);
+  border-bottom-left-radius: var(--rad_lg);
+  background-color: var(--bg0);
+  padding: 0.5em 1em;
+  width: 32em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: var(--text);
+
+  a {
+    color: var(--highlight);
+  }
+}

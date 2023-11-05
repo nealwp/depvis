@@ -1,0 +1,111 @@
+:root {
+  color-scheme: light dark;
+
+  --rad_sm: 5px;
+  --rad_lg: 10px;
+  --inspector-size: 32em;
+  --tabs-height: 24pt;
+  --bg-gradient: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2),
+    transparent 100%
+  );
+
+  --text: #020303;
+  --text-dim: #999;
+  --bg0: #f1f4f4;
+  --bg1: #bbb;
+  --bg2: #ddd;
+
+  --tabs-bg: #7e7e7d;
+  --tabs-text: #fff;
+  --highlight: #e65c00;
+
+  // Named stroke colors (for borders and lines that should contrast well with background colors)
+  --stroke-L: 40%;
+  --stroke-S: 100%;
+  --stroke-blue: hsl(180, var(--stroke-S), var(--stroke-L));
+  --stroke-orange: hsl(30, var(--stroke-S), var(--stroke-L));
+  --stroke-green: hsl(120, var(--stroke-S), var(--stroke-L));
+  --stroke-indigo: hsl(240, var(--stroke-S), var(--stroke-L));
+  --stroke-red: hsl(0, var(--stroke-S), var(--stroke-L));
+  --stroke-violet: hsl(300, var(--stroke-S), var(--stroke-L));
+  --stroke-yellow: hsl(60, var(--stroke-S), var(--stroke-L));
+
+  // Named background colors (should contrast well with text color)
+  --bg-L: 70%; // Background intensity
+  --bg-S: 100%; // Background saturation
+  --bg-dark-L: 50%; // Dark bg intensity
+  --bg-dark-S: 60%; // Dark bg saturation
+
+  --bg-blue: hsl(180, var(--bg-S), var(--bg-L));
+  --bg-green: hsl(120, var(--bg-S), var(--bg-L));
+  --bg-indigo: hsl(240, var(--bg-S), var(--bg-L));
+  --bg-orange: hsl(30, var(--bg-S), var(--bg-L));
+  --bg-red: hsl(0, var(--bg-S), var(--bg-L));
+  --bg-violet: hsl(300, var(--bg-S), var(--bg-L));
+  --bg-yellow: hsl(60, var(--bg-S), var(--bg-L));
+
+  --bg-darkblue: hsl(180, var(--bg-dark-S), var(--bg-dark-L));
+  --bg-darkgreen: hsl(120, var(--bg-dark-S), var(--bg-dark-L));
+  --bg-darkindigo: hsl(240, var(--bg-dark-S), var(--bg-dark-L));
+  --bg-darkorange: hsl(30, var(--bg-dark-S), var(--bg-dark-L));
+  --bg-darkred: hsl(0, var(--bg-dark-S), var(--bg-dark-L));
+  --bg-darkviolet: hsl(300, var(--bg-dark-S), var(--bg-dark-L));
+  --bg-darkyellow: hsl(60, var(--bg-dark-S), var(--bg-dark-L));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #111;
+
+    --text: #f3f3f3;
+    --text-dim: #766;
+    --bg0: #262222;
+    --bg1: #696666;
+    --bg2: #333;
+
+    --stroke-L: 60%;
+    --bg-L: 30%;
+    --bg-dark-L: 40%;
+
+    --highlight: #ff761a;
+    --inset-shadow-color: black;
+  }
+}
+
+html {
+  font-size: 10pt;
+  font-family:
+    system-ui,
+    Segoe UI,
+    Helvetica,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+h2 {
+  border-radius: var(--rad_sm);
+  font-size: 14pt;
+}
+
+#app {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
