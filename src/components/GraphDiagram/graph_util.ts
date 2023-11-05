@@ -13,13 +13,10 @@ export type DependencyKey =
 
 type DependencyEntry = {
   name: string;
-  version: string;
-  type: DependencyKey;
 };
 
 type Dependency = {
   module: Module;
-  type: DependencyKey;
 };
 
 type GraphModuleInfo = {
@@ -36,28 +33,13 @@ export type GraphState = {
   entryModules: Set<Module>;
 };
 
-const DEPENDENCIES_ONLY = new Set<DependencyKey>(['dependencies']);
-
-function getDependencyEntries(
-  module: Module,
-  dependencyTypes: Set<DependencyKey>,
-  level = 0,
-) {
-  // We only add non-"dependencies" at the top-level.
-  if (level > 0) dependencyTypes = DEPENDENCIES_ONLY;
-
+function getDependencyEntries(module: Module) {
   const depEntries = new Set<DependencyEntry>();
-  for (const type of dependencyTypes) {
-    const deps = module.name[type];
-    if (!deps) continue;
+  const deps = module.dependencies;
 
-    // Only do one level for non-"dependencies"
-    if (level > 0 && type != 'dependencies') continue;
-
-    // Get entries, adding type to each entry
-    for (const [name, version] of Object.entries(deps)) {
-      depEntries.add({ name, version, type });
-    }
+  // Get entries, adding type to each entry
+  for (const name of deps) {
+      depEntries.add({name});
   }
 
   return depEntries;
@@ -107,23 +89,22 @@ export async function getGraphForQuery(
 
     // Get dependency entries
     const downstreamEntries = moduleFilter(module)
-      ? getDependencyEntries(module, dependencyTypes, level)
+      ? getDependencyEntries(module)
       : new Set<DependencyEntry>();
 
     // Walk downstream dependencies
     await Promise.allSettled(
-      [...downstreamEntries].map(async ({ name, version, type }) => {
-        const downstreamModule = await getModule(getModuleKey(name, version));
+      [...downstreamEntries].map(async ({ name }) => {
+        const downstreamModule = getModule(name);
 
         // Don't walk peerDependencies
         const moduleInfo = await _visit(
           downstreamModule,
           level + 1,
-          type !== 'peerDependencies',
         );
 
-        moduleInfo?.upstream.add({ module, type });
-        info?.downstream.add({ module: downstreamModule, type });
+        moduleInfo?.upstream.add({ module });
+        info?.downstream.add({ module: downstreamModule });
       }),
     );
 

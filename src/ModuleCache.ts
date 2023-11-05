@@ -1,20 +1,9 @@
 import { PackageJson, Packument, PackumentVersion } from '@npm/types';
-import semverGt from 'semver/functions/gt.js';
-import semverSatisfies from 'semver/functions/satisfies.js';
-import HttpError from './HttpError.js';
 import Module from './Module.js';
 import {
-  cachePackument,
-  getCachedPackument,
   getNPMPackument,
 } from './PackumentCache.js';
-import PromiseWithResolvers, {
-  PromiseWithResolversType,
-} from './PromiseWithResolvers.js';
-import URLPlus from './URLPlus.js';
-import { PARAM_PACKAGES } from './constants.js';
 import fetchJSON from './fetchJSON.js';
-import { flash } from './flash.js';
 import {
   getModuleKey,
   isHttpModule,
@@ -88,24 +77,26 @@ async function fetchModuleFromURL(urlString: string) {
 
 // Note: This method should not throw!  Errors should be returned as part of a
 // stub module
-export async function getModule(moduleKey: string): Promise<Module> {
+export function getModule(moduleKey: string): Module {
   if (!moduleKey) throw Error('Undefined module name');
 
-  let [name, version] = parseModuleKey(moduleKey);
+    const exampleData = [
+        { name: "service-a", label: "Service A", dependencies: ["service-b", "service-c", "service-d"] },
+        { name: "service-b", label: "Service B", dependencies: ["service-c", "service-d", "service-e"] },
+        { name: "service-c", label: "Service C", dependencies: ["service-d", "service-e", "service-f"] },
+        { name: "service-d", label: "Service D", dependencies: ["service-e", "service-f", "service-g"] },
+        { name: "service-e", label: "Service E", dependencies: ["service-f", "service-g", "service-h"] },
+        { name: "service-f", label: "Service F", dependencies: ["service-g", "service-h", "service-i"] },
+        { name: "service-g", label: "Service G", dependencies: ["service-h", "service-i", "service-j"] },
+        { name: "service-h", label: "Service H", dependencies: ["service-i", "service-j", "service-k"] },
+        { name: "service-i", label: "Service I", dependencies: ["service-j", "service-k", "database"] },
+        { name: "service-j", label: "Service J", dependencies: ["service-k", "database"] },
+        { name: "service-k", label: "Service K", dependencies: ["database"] },
+        { name: "database", label: "Database", dependencies: [] },
+    ]
 
-  if (isHttpModule(moduleKey)) {
-    name = moduleKey;
-    version = '';
-    // unchanged
-  } else {
-    [name, version] = resolveModule(name, version);
-  }
-
-  moduleKey = getModuleKey(name, version);
-
-  // Fetch module based on type
-  if (isHttpModule(moduleKey)) { } else { }
-
+    const {name, label, dependencies}  = exampleData.filter(module => module.name === moduleKey)[0]
+    return new Module(name, label, dependencies)
 }
 
 /**

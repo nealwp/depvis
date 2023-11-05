@@ -3,6 +3,7 @@ import { select } from 'd3-selection';
 import React, { useEffect, useState } from 'react';
 import { QueryType, queryModuleCache } from '../../ModuleCache.js';
 import { report } from '../../bugsnag.js';
+import { getModule } from '../../ModuleCache.js';
 import {
   PARAM_COLORIZE,
   PARAM_DEPENDENCIES,
