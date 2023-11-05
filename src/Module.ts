@@ -7,7 +7,7 @@ export default class Module {
 
   constructor(name: string, label: string, dependencies: string[]) {
     if (!name) {
-      throw new Error(`Package name is required`);
+      throw new Error(`name is required`);
     }
     this.dependencies = dependencies;
     this.name = name;

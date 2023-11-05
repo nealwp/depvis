@@ -223,7 +223,7 @@ export default function GraphDiagram() {
         const key = $(el, 'text')[0].textContent;
         if (!key) continue;
 
-        const m = new Module();
+        const m = getModule(key);
 
         if (!m) continue;
 
