@@ -1,7 +1,7 @@
 import simplur from 'simplur';
-import Module from '../../src/Module.js';
-import { getModule } from '../../src/ModuleCache.js';
-import { getModuleKey } from '../../src/module_util.js';
+import Module from '../../Module.js';
+import { getModule } from '../../ModuleCache.js';
+import { getModuleKey } from '../../module_util.js';
 
 const FONT = 'Roboto Condensed, sans-serif';
 

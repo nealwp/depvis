@@ -1,5 +1,5 @@
 import React from 'react';
-import sharedStateHook from '../../src/sharedStateHook.js';
+import sharedStateHook from '../../sharedStateHook.js';
 import GraphDiagram from '../GraphDiagram/GraphDiagram.js';
 import { GraphState } from '../GraphDiagram/graph_util.js';
 import Inspector from '../Inspector.js';

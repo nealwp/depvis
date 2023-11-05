@@ -1,8 +1,8 @@
 import { Graphviz } from '@hpcc-js/wasm/graphviz';
 import { select } from 'd3-selection';
 import React, { useEffect, useState } from 'react';
-import { QueryType, queryModuleCache } from '../../src/ModuleCache.js';
-import { report } from '../../src/bugsnag.js';
+import { QueryType, queryModuleCache } from '../../ModuleCache.js';
+import { report } from '../../bugsnag.js';
 import {
   PARAM_COLORIZE,
   PARAM_DEPENDENCIES,
@@ -11,14 +11,14 @@ import {
   ZOOM_FIT_HEIGHT,
   ZOOM_FIT_WIDTH,
   ZOOM_NONE,
-} from '../../src/constants.js';
-import { createAbortable } from '../../src/createAbortable.js';
-import $ from '../../src/dom.js';
-import { flash } from '../../src/flash.js';
-import useCollapse from '../../src/useCollapse.js';
-import useGraphSelection from '../../src/useGraphSelection.js';
-import useHashParam from '../../src/useHashParam.js';
-import { useQuery } from '../../src/useQuery.js';
+} from '../../constants.js';
+import { createAbortable } from '../../createAbortable.js';
+import $ from '../../dom.js';
+import { flash } from '../../flash.js';
+import useCollapse from '../../useCollapse.js';
+import useGraphSelection from '../../useGraphSelection.js';
+import useHashParam from '../../useHashParam.js';
+import { useQuery } from '../../useQuery.js';
 import { useGraph, usePane } from '../App/App.js';
 import './GraphDiagram.scss';
 import GraphDiagramDownloadButton from './GraphDiagramDownloadButton.js';
@@ -30,7 +30,7 @@ import {
   gatherSelectionInfo,
   getGraphForQuery,
 } from './graph_util.js';
-import Module from '../../src/Module.js';
+import Module from '../../Module.js';
 
 export type ZoomOption =
   | typeof ZOOM_NONE

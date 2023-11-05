@@ -2,7 +2,7 @@ import './bugsnag.js'; // Initialize ASAP!
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from '../components/App/App.js';
+import App from './components/App/App.js';
 import { DiagramTitle } from './DiagramTitle.js';
 import { flash } from './flash.js';
 

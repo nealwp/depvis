@@ -1,10 +1,10 @@
 import React from 'react';
-import { report } from '../../src/bugsnag.js';
-import $ from '../../src/dom.js';
+import { report } from '../../bugsnag.js';
+import $ from '../../dom.js';
 import { DownloadIcon } from '../Icons.js';
 import { getDiagramElement } from './GraphDiagram.js';
 
-import indexStyles from '../../index.scss';
+import indexStyles from '../../../index.scss';
 import diagramStyles from './GraphDiagram.scss';
 
 type DownloadExtension = 'svg' | 'png';

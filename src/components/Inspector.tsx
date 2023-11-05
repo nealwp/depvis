@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
-import { PARAM_HIDE } from '../src/constants.js';
-import useGraphSelection from '../src/useGraphSelection.js';
-import useHashParam from '../src/useHashParam.js';
+import { PARAM_HIDE } from '../constants.js';
+import useGraphSelection from '../useGraphSelection.js';
+import useHashParam from '../useHashParam.js';
 import { usePane } from './App/App.js';
 import InfoPane from './InfoPane/InfoPane.js';
 import './Inspector.scss';

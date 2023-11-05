@@ -1,5 +1,5 @@
 import React, { HTMLProps, SVGProps } from 'react';
-import { cn } from '../src/dom.js';
+import { cn } from '../dom.js';
 
 import './Icons.scss';
 

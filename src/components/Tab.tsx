@@ -1,5 +1,5 @@
 import React, { HTMLProps } from 'react';
-import { cn } from '../src/dom.js';
+import { cn } from '../dom.js';
 import './Tab.scss';
 export function Tab({
   active,

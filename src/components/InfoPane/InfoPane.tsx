@@ -1,6 +1,6 @@
 import React, { HTMLProps } from 'react';
 import { Pane } from '../Pane.js';
-import Module from '../../src/Module.js';
+import Module from '../../Module.js';
 
 export default function InfoPane(props: HTMLProps<HTMLDivElement>) {
   function loadData() {

@@ -4,9 +4,9 @@ import {
   ZOOM_FIT_HEIGHT,
   ZOOM_FIT_WIDTH,
   ZOOM_NONE,
-} from '../../src/constants.js';
-import { cn } from '../../src/dom.js';
-import useHashParam from '../../src/useHashParam.js';
+} from '../../constants.js';
+import { cn } from '../../dom.js';
+import useHashParam from '../../useHashParam.js';
 import { ZoomHorizontalIcon, ZoomVerticalIcon } from '../Icons.js';
 
 export function GraphDiagramZoomButtons() {
