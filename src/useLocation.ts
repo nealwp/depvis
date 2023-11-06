@@ -15,23 +15,23 @@ window.addEventListener('popstate', handleLocationUpdate);
 export default function useLocation() {
   const [href, setHref] = useHref();
 
-  const setLocation = (val: string | URL, replace: boolean) => {
-    if (typeof val === 'string') {
-      val = new URL(val);
+  const setLocation = (url: string | URL, replace: boolean) => {
+    if (typeof url === 'string') {
+      url = new URL(url);
     }
 
-    if (val.href === location.href) return;
+    if (url.href === location.href) return;
 
     // Dont' allow direct manipulation
-    Object.freeze(val);
+    Object.freeze(url);
 
     // Update state value
     if (replace) {
-      window.history.replaceState({}, '', val);
+      window.history.replaceState({}, '', url);
     } else {
-      window.history.pushState({}, '', val);
+      window.history.pushState({}, '', url);
     }
-    setHref(val);
+    setHref(url);
   };
 
   return [href, setLocation] as const;

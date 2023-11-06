@@ -4,7 +4,7 @@ export const REGISTRY_BASE_URL = 'https://registry.npmjs.org';
 
 export type QueryType = 'exact' 
 
-const exampleData = [
+export const exampleData = [
     { name: "service-a", label: "Service A", dependencies: ["service-b", "service-c", "service-d", "service-e", "service-f", "service-h"] },
     { name: "service-b", label: "Service B", dependencies: ["database-1"] },
     { name: "service-c", label: "Service C", dependencies: ["database-1", "library-1", "library-2"] },

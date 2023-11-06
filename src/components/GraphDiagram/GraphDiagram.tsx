@@ -30,6 +30,7 @@ import {
   gatherSelectionInfo,
   getGraphForQuery,
 } from './graph_util.js';
+import useLocation from '../../useLocation.js';
 
 export type ZoomOption =
   | typeof ZOOM_NONE
@@ -64,6 +65,8 @@ export default function GraphDiagram() {
   const [colorize] = useHashParam(PARAM_COLORIZE);
   const [zoom] = useHashParam(PARAM_ZOOM);
   const [graphviz, graphvizLoading] = useGraphviz();
+  const [href] = useLocation();
+
 
   // Dependencies to include for top-level modules
   const dependencyTypes = new Set<DependencyKey>(['dependencies']);
@@ -247,7 +250,7 @@ export default function GraphDiagram() {
   // Effect: render graph selection
   useEffect(
     () => updateSelection(graph, queryValue),
-    [queryType, queryValue, domSignal],
+    [href, queryType, queryValue, domSignal],
   );
 
   // Effect: Colorize nodes

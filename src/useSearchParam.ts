@@ -17,7 +17,9 @@ export default function useSearchParam<T extends string>(paramName: string) {
 
     // Update page
     const url = new URL(location);
-    url.search = params.toString();
+    url.search = params.toString()
+
+    url.hash = `#select=exact%3A${url.searchParams.get("q")}` 
 
     setLocation(url, replace);
   };
